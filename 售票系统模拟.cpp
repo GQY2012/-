@@ -1,124 +1,124 @@
-#include "stdio.h"
+ï»¿#include "stdio.h"
 #include "malloc.h"
 #include "stdlib.h"
 #include "string.h"
 
-typedef struct customer{	   //¿Í»§ĞÅÏ¢
-	char name[20];			   //¿Í»§ĞÕÃû
-	int num;				      //¶©Æ±Á¿
-	int level;				  //²ÕÎ»µÈ¼¶
+typedef struct customer{	   //å®¢æˆ·ä¿¡æ¯
+	char name[20];			   //å®¢æˆ·å§“å
+	int num;				      //è®¢ç¥¨é‡
+	int level;				  //èˆ±ä½ç­‰çº§
 	customer *next;
 }customer,*Lcustomer;
 
-typedef struct airline{		//º½ÏßĞÅÏ¢
-	char end_addr[20];		//º½ÏßÖÕµã
-	char line_num[5];		   //º½°àºÅ
-	char plant_num[8];		//·É»úºÅ
-	int day;				       //·ÉĞĞÈÕÆÚ
-	int total;				    //¶¨Ô±
-	int left;				    //Ê£ÓàÆ±Êı
-	customer *booked;		    //ÒÑ¶¨¿Í»§ĞÅÏ¢
-	customer *wait;			//ÅÅ¶ÓµÈºò¶©Æ±ĞÅÏ¢
+typedef struct airline{		//èˆªçº¿ä¿¡æ¯
+	char end_addr[20];		//èˆªçº¿ç»ˆç‚¹
+	char line_num[5];		   //èˆªç­å·
+	char plant_num[8];		//é£æœºå·
+	int day;				       //é£è¡Œæ—¥æœŸ
+	int total;				    //å®šå‘˜
+	int left;				    //å‰©ä½™ç¥¨æ•°
+	customer *booked;		    //å·²å®šå®¢æˆ·ä¿¡æ¯
+	customer *wait;			//æ’é˜Ÿç­‰å€™è®¢ç¥¨ä¿¡æ¯
 	airline *next;
 }airline,*Lairline;
 
-airline *L;					 //½«º½°àĞÅÏ¢¶¨ÒåÎªÈ«¾Ö±äÁ¿£¬¼õÉÙ²ÎÊı´«µİ
-Lairline search_line()		//°´º½°àºÅ²éÕÒº½°à
+airline *L;					 //å°†èˆªç­ä¿¡æ¯å®šä¹‰ä¸ºå…¨å±€å˜é‡ï¼Œå‡å°‘å‚æ•°ä¼ é€’
+Lairline search_line()		//æŒ‰èˆªç­å·æŸ¥æ‰¾èˆªç­
 {
 	char a[5];
 	airline *p;
 	p=L->next;
-	printf("ÇëÊäÈëº½°àºÅ");
+	printf("è¯·è¾“å…¥èˆªç­å·");
 	scanf("%s",a);
 	for(;p;p=p->next)
 		if(!strcmp(a,p->line_num)) break;
 	return p;
 }
 
-Lairline search_plant()		//°´·É»úºÅ²éÕÒº½°à
+Lairline search_plant()		//æŒ‰é£æœºå·æŸ¥æ‰¾èˆªç­
 {
 	char a[8];
 	airline *p;
 	p=L->next;
-	printf("ÇëÊäÈë·É»úºÅ");
+	printf("è¯·è¾“å…¥é£æœºå·");
 	scanf("%s",a);
 	for(;p;p=p->next)
 		if(!strcmp(a,p->plant_num)) break;
 	return p;
 }
 
-Lairline search_day()		//°´·ÉĞĞÈÕÆÚ²éÕÒº½°à
+Lairline search_day()		//æŒ‰é£è¡Œæ—¥æœŸæŸ¥æ‰¾èˆªç­
 {
 	int a;
 	airline *p;
 	p=L->next;
-	printf("ÇëÊäÈë·ÉĞĞÈÕÆÚ");
+	printf("è¯·è¾“å…¥é£è¡Œæ—¥æœŸ");
 	scanf("%d",&a);
 	for(;p;p=p->next)
 		if(a==p->day) break;
 	return p;
 }
 
-Lairline search_addr()		//°´º½°àÖÕµã²éÕÒº½°à
+Lairline search_addr()		//æŒ‰èˆªç­ç»ˆç‚¹æŸ¥æ‰¾èˆªç­
 {
 	char a[20];
 	airline *p;
 	p=L->next;
-	printf("ÇëÊäÈëº½°àÖÕµã");
+	printf("è¯·è¾“å…¥èˆªç­ç»ˆç‚¹");
 	scanf("%s",a);
 	for(;p;p=p->next)
 		if(!strcmp(a,p->end_addr)) break;
 	return p;
 }
 
-void guide()			//Ö÷²Ëµ¥½çÃæ
+void guide()			//ä¸»èœå•ç•Œé¢
 {
-	printf("**********************»¶Ó­½øÈëº½¿ÕÊÛÆ±ÏµÍ³**********************\n");
-	printf("\t\tÏÔÊ¾ËùÓĞº½Ïß==>  1\n");
-	printf("\t\t²éÑ¯º½ÏßĞÅÏ¢==>  2\n");
-	printf("\t\t¶©Æ±ÒµÎñ    ==>  3\n");
-	printf("\t\tÍËÆ±ÒµÎñ    ==>  4\n");
-	printf("\t\tÍË³öÏµÍ³    ==>  0\n");
+	printf("**********************æ¬¢è¿è¿›å…¥èˆªç©ºå”®ç¥¨ç³»ç»Ÿ**********************\n");
+	printf("\t\tæ˜¾ç¤ºæ‰€æœ‰èˆªçº¿==>  1\n");
+	printf("\t\tæŸ¥è¯¢èˆªçº¿ä¿¡æ¯==>  2\n");
+	printf("\t\tè®¢ç¥¨ä¸šåŠ¡    ==>  3\n");
+	printf("\t\té€€ç¥¨ä¸šåŠ¡    ==>  4\n");
+	printf("\t\té€€å‡ºç³»ç»Ÿ    ==>  0\n");
 	printf("**************************************************************\n");
-	printf("\t\tÇå³ıÆÁÄ»ĞÅÏ¢==>  9\n\n");
-	printf("Çë°´ÉÏÃæÖ¸Òı²Ù×÷:\t");
+	printf("\t\tæ¸…é™¤å±å¹•ä¿¡æ¯==>  9\n\n");
+	printf("è¯·æŒ‰ä¸Šé¢æŒ‡å¼•æ“ä½œ:\t");
 }
 
-void print_customer(airline *p)		//ÏÔÊ¾º½°à¿Í»§ĞÅÏ¢
+void print_customer(airline *p)		//æ˜¾ç¤ºèˆªç­å®¢æˆ·ä¿¡æ¯
 {
 	customer *c;
 	if(p->booked)
 	{
 		c=p->booked;
-		printf("ÒÑ¶¨Æ±¿Í»§ĞÅÏ¢\nÆ±Êı\t/\t¿Í»§ĞÕÃû\n");
+		printf("å·²å®šç¥¨å®¢æˆ·ä¿¡æ¯\nç¥¨æ•°\t/\tå®¢æˆ·å§“å\n");
 		for(;c;c=c->next)
 			printf("%5d\t/\t%s\n",c->num,c->name);
 		printf("\n\n");
 	}
 	else
-		printf("ÔİÊ±Ã»ÓĞ¿Í»§¶©Æ±\n\n");
+		printf("æš‚æ—¶æ²¡æœ‰å®¢æˆ·è®¢ç¥¨\n\n");
 	if(p->wait)
 	{
 		c=p->wait;
-		printf("ÅÅ¶Ó¶©Æ±¿Í»§ĞÅÏ¢\nÆ±Êı\t/\t¿Í»§ĞÕÃû\n");
+		printf("æ’é˜Ÿè®¢ç¥¨å®¢æˆ·ä¿¡æ¯\nç¥¨æ•°\t/\tå®¢æˆ·å§“å\n");
 		for(;c;c=c->next)
 			printf("%5d\t/\t%s\n",c->num,c->name);
 		printf("\n\n");
 	}
 	else
-		printf("ÔİÊ±Ã»ÓĞ¿Í»§ÅÅ¶Ó¶©Æ±\n\n");
+		printf("æš‚æ—¶æ²¡æœ‰å®¢æˆ·æ’é˜Ÿè®¢ç¥¨\n\n");
 }
 
-void book()				//¶©Æ±ÏµÍ³
+void book()				//è®¢ç¥¨ç³»ç»Ÿ
 {
 	int i;
 	int flag=0;
 	airline *p;
 	customer *cst,*c;
-	printf("ÇëÊäÈë²éÑ¯º½°àµÄ·½Ê½£º\n");	
-	printf("º½°àºÅ--->1\n");
-	printf("ÖÕµãÕ¾--->2\n");
-	printf("·ÉĞĞÈÕÆÚ->3\n");
+	printf("è¯·è¾“å…¥æŸ¥è¯¢èˆªç­çš„æ–¹å¼ï¼š\n");	
+	printf("èˆªç­å·--->1\n");
+	printf("ç»ˆç‚¹ç«™--->2\n");
+	printf("é£è¡Œæ—¥æœŸ->3\n");
 	for(;!flag;)
 	{
 		scanf("%d",&i);
@@ -127,31 +127,31 @@ void book()				//¶©Æ±ÏµÍ³
 		case 1: p=search_line();flag=1;break;
 		case 2: p=search_addr();flag=1;break;
 		case 3: p=search_day();flag=1;break;
-		default:printf("²Ù×÷´íÎó,ÇëÖØĞÂÊäÈë\n");break;
+		default:printf("æ“ä½œé”™è¯¯,è¯·é‡æ–°è¾“å…¥\n");break;
 		}
 	}
 	if(p)
 	{
 
-		printf("ÖÕµãÕ¾                  º½°àºÅ   ·É»úºÅ   ·ÉĞĞÈÕÆÚ   ÓàÆ±Á¿\n");
+		printf("ç»ˆç‚¹ç«™                  èˆªç­å·   é£æœºå·   é£è¡Œæ—¥æœŸ   ä½™ç¥¨é‡\n");
 		printf("%-20s%10s%10s%8d%8d\n",p->end_addr,p->line_num,p->plant_num,p->day,p->left);
 		cst=(customer *)malloc(sizeof(customer));
-		printf("ÇëÊäÈë¶©Æ±ÊıÁ¿£º");
+		printf("è¯·è¾“å…¥è®¢ç¥¨æ•°é‡ï¼š");
 		scanf("%d",&cst->num);
-		printf("ÇëÊäÈë²ÕÎ»µÈ¼¶£¨1/2/3£©");
+		printf("è¯·è¾“å…¥èˆ±ä½ç­‰çº§ï¼ˆ1/2/3ï¼‰");
 		scanf("%d",&cst->level);
-		printf("ÇëÊäÈëÄúµÄÃû×Ö");
+		printf("è¯·è¾“å…¥æ‚¨çš„åå­—");
 		scanf("%s",cst->name);
 		if(cst->num<=p->left)
 		{
 			cst->next=p->booked;
 			p->booked=cst;
 			p->left=p->left-cst->num;
-			printf("¶©Æ±³É¹¦£¬×ùÎ»ºÅÎª%d~%d\n",p->total-p->left-cst->num+1,p->total-p->left);
+			printf("è®¢ç¥¨æˆåŠŸï¼Œåº§ä½å·ä¸º%d~%d\n",p->total-p->left-cst->num+1,p->total-p->left);
 		}
 		else
 		{
-			printf("ÓàÆ±²»×ã£¬ÊÇ·ñÅÅ¶ÓµÈºò£¿\nÊÇ£¨1£©\n·ñ£¨0£©\n");
+			printf("ä½™ç¥¨ä¸è¶³ï¼Œæ˜¯å¦æ’é˜Ÿç­‰å€™ï¼Ÿ\næ˜¯ï¼ˆ1ï¼‰\nå¦ï¼ˆ0ï¼‰\n");
 			scanf("%d",&flag);
 			if(flag)
 			{
@@ -171,11 +171,11 @@ void book()				//¶©Æ±ÏµÍ³
 		}
 	}
 	else 
-		printf("Ã»ÓĞ¸Ãº½°à\n");
+		printf("æ²¡æœ‰è¯¥èˆªç­\n");
 	guide();
 }
 
-void waited(airline *p)			//ÅÅ¶Ó¶©Æ±ÏµÍ³
+void waited(airline *p)			//æ’é˜Ÿè®¢ç¥¨ç³»ç»Ÿ
 {
 	int flag;
 	customer *q,*q0,*h;
@@ -190,7 +190,7 @@ void waited(airline *p)			//ÅÅ¶Ó¶©Æ±ÏµÍ³
 	{
 		if(q->next->num<p->left)
 		{
-			printf("%s£¬ÄúÕıÔÚÅÅ¶Ó¶¨%dÕÅÆ±£¬ÏÖÓĞÆ±£¬ÊÇ·ñ¶¨Æ±\nÊÇ£¨1£©\n·ñ£¨0£©\n",q->next->name,q->next->num);
+			printf("%sï¼Œæ‚¨æ­£åœ¨æ’é˜Ÿå®š%då¼ ç¥¨ï¼Œç°æœ‰ç¥¨ï¼Œæ˜¯å¦å®šç¥¨\næ˜¯ï¼ˆ1ï¼‰\nå¦ï¼ˆ0ï¼‰\n",q->next->name,q->next->num);
 			scanf("%d",&flag);
 			if(flag)
 			{
@@ -199,7 +199,7 @@ void waited(airline *p)			//ÅÅ¶Ó¶©Æ±ÏµÍ³
 				q0->next=p->booked;
 				p->booked=q0;
 				p->left=p->left-q0->num;
-				printf("ÅÅ¶Ó¶©Æ±³É¹¦\n\n");
+				printf("æ’é˜Ÿè®¢ç¥¨æˆåŠŸ\n\n");
 			}
 			else
 				q=q->next;
@@ -209,7 +209,7 @@ void waited(airline *p)			//ÅÅ¶Ó¶©Æ±ÏµÍ³
 	}
 	p->wait=h->next;
 }
-void refund()			//ÍËÆ±ÏµÍ³
+void refund()			//é€€ç¥¨ç³»ç»Ÿ
 {
 	int flag;
 	char a[20];
@@ -219,29 +219,29 @@ void refund()			//ÍËÆ±ÏµÍ³
 	c=p->booked;
 	if(!p)
 	{	
-		printf("Ã»ÓĞ¸Ãº½°à\n\n");
+		printf("æ²¡æœ‰è¯¥èˆªç­\n\n");
 		guide();
 		return;
 	}
-	printf("ÇëÊäÈëÄúµÄĞÕÃû");
+	printf("è¯·è¾“å…¥æ‚¨çš„å§“å");
 	scanf("%s",a);
 	if(!p->booked->name)
 	{
-		printf("¶Ô²»Æğ£¬Ã»ÓĞÕÒµ½ÄúµÄĞÅÏ¢\n\n");
+		printf("å¯¹ä¸èµ·ï¼Œæ²¡æœ‰æ‰¾åˆ°æ‚¨çš„ä¿¡æ¯\n\n");
 		guide();
 		return ;
 	}
 	if(!strcmp(a,p->booked->name))
 	{
-		printf("ÍËÆ±ĞÅÏ¢\nĞÕÃû/ÖÕµãÕ¾/Æ±Êı\n%s/%s/%d\n",p->booked->name,p->end_addr,p->booked->num);
-		printf("È·ÈÏÒªÍËÆ±£¿£¨£©\nÊÇ£¨1£©\n·ñ£¨0)\n");
+		printf("é€€ç¥¨ä¿¡æ¯\nå§“å/ç»ˆç‚¹ç«™/ç¥¨æ•°\n%s/%s/%d\n",p->booked->name,p->end_addr,p->booked->num);
+		printf("ç¡®è®¤è¦é€€ç¥¨ï¼Ÿï¼ˆï¼‰\næ˜¯ï¼ˆ1ï¼‰\nå¦ï¼ˆ0)\n");
 		scanf("%d",&flag);
 		if(flag)
 		{
 			p->booked=p->booked->next;
 			p->left=p->left+c->num;
 			free(c);
-			printf("ÍËÆ±³É¹¦\n\n");
+			printf("é€€ç¥¨æˆåŠŸ\n\n");
 			waited(p);
 			guide();
 		}
@@ -253,14 +253,14 @@ void refund()			//ÍËÆ±ÏµÍ³
 				break;
 		if(!c->next)
 		{
-			printf("¶Ô²»Æğ£¬Ã»ÓĞÕÒµ½ÄúµÄĞÅÏ¢\n\n");
+			printf("å¯¹ä¸èµ·ï¼Œæ²¡æœ‰æ‰¾åˆ°æ‚¨çš„ä¿¡æ¯\n\n");
 			guide();
 			return ;
 		}
 		else
 		{
-			printf("ÍËÆ±ĞÅÏ¢\nĞÕÃû/ÖÕµãÕ¾/Æ±Êı\n%s/%s/%d\n",c->next->name,p->end_addr,c->next->num);
-			printf("È·ÈÏÒªÍËÆ±£¿£¨£©\nÊÇ£¨1£©\n·ñ£¨0)\n");
+			printf("é€€ç¥¨ä¿¡æ¯\nå§“å/ç»ˆç‚¹ç«™/ç¥¨æ•°\n%s/%s/%d\n",c->next->name,p->end_addr,c->next->num);
+			printf("ç¡®è®¤è¦é€€ç¥¨ï¼Ÿï¼ˆï¼‰\næ˜¯ï¼ˆ1ï¼‰\nå¦ï¼ˆ0)\n");
 			scanf("%d",&flag);
 			if(flag)
 			{
@@ -268,7 +268,7 @@ void refund()			//ÍËÆ±ÏµÍ³
 				c->next=c->next->next;
 				p->left=p->left+c1->num;
 				free(c1);
-				printf("ÍËÆ±³É¹¦\n\n");
+				printf("é€€ç¥¨æˆåŠŸ\n\n");
 				waited(p);
 				guide();
 			}
@@ -277,16 +277,16 @@ void refund()			//ÍËÆ±ÏµÍ³
 
 }
 
-void search()			//º½°à²éÑ¯ÏµÍ³
+void search()			//èˆªç­æŸ¥è¯¢ç³»ç»Ÿ
 {
 	int i;
 	int flag=0;
 	airline *p;
-	printf("ÇëÊäÈë²éÑ¯º½°àµÄ·½Ê½£º\n");
-	printf("º½°àºÅ---->1\n");
-	printf("·É»úºÅ---->2\n");
-	printf("·ÉĞĞÈÕÆÚ-->3\n");
-	printf("º½°àÖÕµã-->4\n");
+	printf("è¯·è¾“å…¥æŸ¥è¯¢èˆªç­çš„æ–¹å¼ï¼š\n");
+	printf("èˆªç­å·---->1\n");
+	printf("é£æœºå·---->2\n");
+	printf("é£è¡Œæ—¥æœŸ-->3\n");
+	printf("èˆªç­ç»ˆç‚¹-->4\n");
 	scanf("%d",&i);
 	for(;!flag;)
 		switch(i)
@@ -295,22 +295,22 @@ void search()			//º½°à²éÑ¯ÏµÍ³
 		case 2: p=search_plant();flag=1;break;
 		case 3: p=search_day();flag=1;break;
 		case 4: p=search_addr();flag-=1;break;
-		default:printf("²Ù×÷´íÎó,ÇëÖØĞÂÊäÈë\n");break;
+		default:printf("æ“ä½œé”™è¯¯,è¯·é‡æ–°è¾“å…¥\n");break;
 		}
 	if(p)
 	{
-		printf("ÖÕµãÕ¾                 º½°àºÅ   ·É»úºÅ   ·ÉĞĞÈÕÆÚ   ÓàÆ±Á¿\n");
+		printf("ç»ˆç‚¹ç«™                 èˆªç­å·   é£æœºå·   é£è¡Œæ—¥æœŸ   ä½™ç¥¨é‡\n");
 		printf("%-20s%10s%10s%8d%8d\n",p->end_addr,p->line_num,p->plant_num,p->day,p->left);
-		printf("ÊÇ·ñ¶©Æ±£¨È·¶¨Çë°´1£©");
+		printf("æ˜¯å¦è®¢ç¥¨ï¼ˆç¡®å®šè¯·æŒ‰1ï¼‰");
 		scanf("%d",&i);
 		if(i==1)
 				book();
 	}
 	else 
-		printf("Ã»ÓĞ¸Ãº½°à\n");
+		printf("æ²¡æœ‰è¯¥èˆªç­\n");
 }
 
-void InitLine()				//³õÊ¼»¯º½ÏßĞÅÏ¢
+void InitLine()				//åˆå§‹åŒ–èˆªçº¿ä¿¡æ¯
 {
 	airline *p,*q;
 	L=(airline *)malloc(sizeof(airline));
@@ -325,7 +325,7 @@ void InitLine()				//³õÊ¼»¯º½ÏßĞÅÏ¢
     p=(airline *)malloc(sizeof(airline));
 	p->booked=NULL;
 	p->wait=NULL;
-	strcpy(p->end_addr,"Ìì½ò");
+	strcpy(p->end_addr,"å¤©æ´¥");
 	strcpy(p->line_num,"004");
 	strcpy(p->plant_num," 3667894");
 	p->day=4;
@@ -337,7 +337,7 @@ void InitLine()				//³õÊ¼»¯º½ÏßĞÅÏ¢
 	p=(airline *)malloc(sizeof(airline));
 	p->booked=NULL;
 	p->wait=NULL;
-	strcpy(p->end_addr,"¹ãÖİ");
+	strcpy(p->end_addr,"å¹¿å·");
 	strcpy(p->line_num,"003");
 	strcpy(p->plant_num,"4558934");
 	p->day=3;
@@ -349,7 +349,7 @@ void InitLine()				//³õÊ¼»¯º½ÏßĞÅÏ¢
 	p=(airline *)malloc(sizeof(airline));
 	p->booked=NULL;
 	p->wait=NULL;
-	strcpy(p->end_addr,"ÉÏº£");
+	strcpy(p->end_addr,"ä¸Šæµ·");
 	strcpy(p->line_num,"002");
 	strcpy(p->plant_num,"2682154");
 	p->day=2;
@@ -361,7 +361,7 @@ void InitLine()				//³õÊ¼»¯º½ÏßĞÅÏ¢
    p=(airline *)malloc(sizeof(airline));
 	p->booked=NULL;
 	p->wait=NULL;
-	strcpy(p->end_addr,"±±¾©");
+	strcpy(p->end_addr,"åŒ—äº¬");
 	strcpy(p->line_num,"001");
 	strcpy(p->plant_num," 2586934");
 	p->day=1;
@@ -371,18 +371,18 @@ void InitLine()				//³õÊ¼»¯º½ÏßĞÅÏ¢
 	q->next=p;
 } 
 
-void printline()			//ÏÔÊ¾ËùÓĞº½°àĞÅÏ¢
+void printline()			//æ˜¾ç¤ºæ‰€æœ‰èˆªç­ä¿¡æ¯
 {
 	int flag;
 	airline *p;
 	p=L->next;
-	printf("ÖÕµãÕ¾                  º½°àºÅ   ·É»úºÅ   ·ÉĞĞÈÕÆÚ   ÓàÆ±Á¿\n");
+	printf("ç»ˆç‚¹ç«™                  èˆªç­å·   é£æœºå·   é£è¡Œæ—¥æœŸ   ä½™ç¥¨é‡\n");
 	for(;p;p=p->next)
 	{
 		printf("%-20s%10s%10s%8d%8d\n",p->end_addr,p->line_num,p->plant_num,p->day,p->left);
 
 	}
-	printf("°´1½øÈë¶©Æ±ÏµÍ³£¬°´0·µ»ØÖ÷²Ëµ¥\n");
+	printf("æŒ‰1è¿›å…¥è®¢ç¥¨ç³»ç»Ÿï¼ŒæŒ‰0è¿”å›ä¸»èœå•\n");
 	scanf("%d",&flag);
 	if(flag)
 		book();
@@ -390,7 +390,7 @@ void printline()			//ÏÔÊ¾ËùÓĞº½°àĞÅÏ¢
 
 }
 
-main()				//Ö÷º¯Êı
+main()				//ä¸»å‡½æ•°
 {
 	int flag=1;
 	guide();

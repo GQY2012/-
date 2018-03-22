@@ -1,46 +1,46 @@
-#include <stdio.h>  
+ï»¿#include <stdio.h>  
 #include <stdlib.h>
 #include <malloc.h>
 #include <conio.h> 
 #include <time.h>
-/*È«¾Ö±äÁ¿*/
-int ArrivalTime=0;      //µ½´ïÊ±¿Ì
-	   int business=0;         //°ìÀíµÄÒµÎñ
-	   int Duration=0;         //°ìÀíÒµÎñËùĞèÊ±¼ä
-	   int money=0;            //°ìÀíµÄ½ğ¶î
-	   int durtime=0;          //¾àÀëÉÏÒ»¸öµ½´ïÊ±¼äµÄÊ±¼ä¼ä¸ô 
+/*å…¨å±€å˜é‡*/
+int ArrivalTime=0;      //åˆ°è¾¾æ—¶åˆ»
+	   int business=0;         //åŠç†çš„ä¸šåŠ¡
+	   int Duration=0;         //åŠç†ä¸šåŠ¡æ‰€éœ€æ—¶é—´
+	   int money=0;            //åŠç†çš„é‡‘é¢
+	   int durtime=0;          //è·ç¦»ä¸Šä¸€ä¸ªåˆ°è¾¾æ—¶é—´çš„æ—¶é—´é—´éš” 
 	   int num=0;
 	   int leavetime=0;
 	   int TotalTime=0,CustomerNum=0,Summoney=0,CloseTime=0; 
-typedef struct Node{         // ¿Í»§¼ÇÂ¼
-       int ArrivalTime;      //µ½´ïÊ±¿Ì
-	   int business;         //°ìÀíµÄÒµÎñ
-	   int Duration;         //°ìÀíÒµÎñËùĞèÊ±¼ä
-	   int money;            //°ìÀíµÄ½ğ¶î
+typedef struct Node{         // å®¢æˆ·è®°å½•
+       int ArrivalTime;      //åˆ°è¾¾æ—¶åˆ»
+	   int business;         //åŠç†çš„ä¸šåŠ¡
+	   int Duration;         //åŠç†ä¸šåŠ¡æ‰€éœ€æ—¶é—´
+	   int money;            //åŠç†çš„é‡‘é¢
 	   int num;
 }QElemType;
-typedef struct QNode         //½Úµã
+typedef struct QNode         //èŠ‚ç‚¹
 {
 QElemType elem;
 struct QNode *next;
 }QNode,*QueuePtr;
-typedef struct LinkQueue     //¶ÓÁĞ
+typedef struct LinkQueue     //é˜Ÿåˆ—
 { 
  QueuePtr front;
  QueuePtr rear;
 }LinkQueue;
-int InitQueue(LinkQueue &Q)            //³õÊ¼»¯¶ÓÁĞ
+int InitQueue(LinkQueue &Q)            //åˆå§‹åŒ–é˜Ÿåˆ—
 { 
  Q.front=Q.rear=(QueuePtr)malloc(sizeof(QNode));
  if(!Q.front) exit(0);
  Q.front->next=NULL;
  return 1;
 }
-void EnterQueue(LinkQueue &Q,int money2,int temp)                        //Èë¶Ó
+void EnterQueue(LinkQueue &Q,int money2,int temp)                        //å…¥é˜Ÿ
 {
   QueuePtr p;
   if((p=(QueuePtr)malloc(sizeof(QNode)))== NULL)
-  {printf("Èë¶ÓÊ§°Ü");exit(0);}
+  {printf("å…¥é˜Ÿå¤±è´¥");exit(0);}
   p->elem.ArrivalTime=ArrivalTime;
   p->elem.Duration=temp;
   p->elem.money=money2;
@@ -48,12 +48,12 @@ void EnterQueue(LinkQueue &Q,int money2,int temp)                        //Èë¶Ó
   p->next=NULL;
   Q.rear->next=p;
   Q.rear=p;
-  printf("³É¹¦½øÈë´°¿Ú2\n");
-  printf("½øÈëµÄÇ®Êı£º%d\n",money2);
+  printf("æˆåŠŸè¿›å…¥çª—å£2\n");
+  printf("è¿›å…¥çš„é’±æ•°ï¼š%d\n",money2);
   
 }
 
-int QLength(LinkQueue &q)              //¶ÓÁĞ³¤¶È
+int QLength(LinkQueue &q)              //é˜Ÿåˆ—é•¿åº¦
 { 
 QNode*qtemp;
 int i=0;
@@ -77,24 +77,24 @@ free(p);
 q.front->next=NULL;
 q.rear = q.front;
 }
-void Check(LinkQueue &Q,int Summoney)                              //¼ì²âÊÇ·ñÂú×ã´°¿Ú2ÖĞ¿Í»§µÄÒªÇó
+void Check(LinkQueue &Q,int Summoney)                              //æ£€æµ‹æ˜¯å¦æ»¡è¶³çª—å£2ä¸­å®¢æˆ·çš„è¦æ±‚
 {  
 	int i,t;
 	QNode*p=Q.front->next;
 	QNode*q;
-	printf("¼ì²é´°¿Ú¶ş\n");
-	printf("¼ì²éµ½¿Í»§Êı£º%d\n",QLength(Q));
+	printf("æ£€æŸ¥çª—å£äºŒ\n");
+	printf("æ£€æŸ¥åˆ°å®¢æˆ·æ•°ï¼š%d\n",QLength(Q));
 	t=QLength(Q);
 	for(i=0;i<t;i++)
 	{
-        printf("¼ì²éµ½¿Í»§µÄÇ®Êı£º%d\n",p->elem.money);
+        printf("æ£€æŸ¥åˆ°å®¢æˆ·çš„é’±æ•°ï¼š%d\n",p->elem.money);
 		ArrivalTime=p->elem.ArrivalTime;
 		num=p->elem.num;
 		if(p->elem.money<=Summoney) {
 			Summoney-=p->elem.money;
             leavetime=leavetime+p->elem.Duration;
             TotalTime += leavetime - ArrivalTime;
-			 printf("µÚ%3d¿Í»§µ½´ïÊ±¼ä%3d°ìÀíÒµÎñ2°ìÀí½ğ¶î%5dÒøĞĞ×Ü½ğ¶î%5dÀë¿ªÊ±¼ä%3d\n",num,ArrivalTime,p->elem.money,Summoney,leavetime);
+			 printf("ç¬¬%3då®¢æˆ·åˆ°è¾¾æ—¶é—´%3dåŠç†ä¸šåŠ¡2åŠç†é‡‘é¢%5dé“¶è¡Œæ€»é‡‘é¢%5dç¦»å¼€æ—¶é—´%3d\n",num,ArrivalTime,p->elem.money,Summoney,leavetime);
 		    Q.front->next=p->next;
 		    q=p;
 		    free(q);
@@ -102,7 +102,7 @@ void Check(LinkQueue &Q,int Summoney)                              //¼ì²âÊÇ·ñÂú×
 			if(leavetime>CloseTime){
 			CustomerNum=CustomerNum-QLength(Q);
              DestoryQueue(Q);
-            printf("½áÊøÓªÒµ\n");
+            printf("ç»“æŸè¥ä¸š\n");
 			break;			 
 			}
 		} 
@@ -123,15 +123,15 @@ int main(){
 	int t1,t2;
        LinkQueue q;
 	   InitQueue(q);
-	   printf("ÇëÊäÈëÓªÒµÊ±¼ä£¨·ÖÖÓ£©£º");
+	   printf("è¯·è¾“å…¥è¥ä¸šæ—¶é—´ï¼ˆåˆ†é’Ÿï¼‰ï¼š");
 	   scanf("%d",&CloseTime);
-	   printf("ÒøĞĞ³õÊ¼½ğ¶î£º");
+	   printf("é“¶è¡Œåˆå§‹é‡‘é¢ï¼š");
 	   scanf("%d",&Summoney);
-	   printf("µ½´ïÊ±¼äµÄ×î´ó¼ä¸ô£º");
+	   printf("åˆ°è¾¾æ—¶é—´çš„æœ€å¤§é—´éš”ï¼š");
 	   scanf("%d",&t1);
-	   printf("°ìÀíÒµÎñËùĞèµÄ×î´óÊ±¼ä£º");
+	   printf("åŠç†ä¸šåŠ¡æ‰€éœ€çš„æœ€å¤§æ—¶é—´ï¼š");
 	   scanf("%d",&t2);
-	   printf("¿ªÊ¼ÓªÒµ\n");
+	   printf("å¼€å§‹è¥ä¸š\n");
 	   srand((unsigned) time(NULL));
 	   while(1){
 		   
@@ -143,13 +143,13 @@ int main(){
 		   if(business==1){
 		     if(ArrivalTime>=leavetime)leavetime=ArrivalTime+Duration;
         	 else leavetime=leavetime+Duration;
-			 if(leavetime>CloseTime) {printf("½áÊøÓªÒµ\n");break;}
+			 if(leavetime>CloseTime) {printf("ç»“æŸè¥ä¸š\n");break;}
 			 else {
 				 TotalTime+=leavetime-ArrivalTime;
                  CustomerNum++;
 				 num=CustomerNum;
 				 Summoney+=money;
-				 printf("µÚ%3d¿Í»§µ½´ïÊ±¼ä%3d°ìÀíÒµÎñ1°ìÀí½ğ¶î%5dÒøĞĞ×Ü½ğ¶î%5dÀë¿ªÊ±¼ä%3d\n",num,ArrivalTime,money,Summoney,leavetime);
+				 printf("ç¬¬%3då®¢æˆ·åˆ°è¾¾æ—¶é—´%3dåŠç†ä¸šåŠ¡1åŠç†é‡‘é¢%5dé“¶è¡Œæ€»é‡‘é¢%5dç¦»å¼€æ—¶é—´%3d\n",num,ArrivalTime,money,Summoney,leavetime);
 				 Check(q,Summoney);
 			 }
 		   }
@@ -157,17 +157,17 @@ int main(){
 			   if(money<=Summoney){
 				 if(ArrivalTime>=leavetime)leavetime=ArrivalTime+Duration;
         	     else leavetime=leavetime+Duration;
-				 if(leavetime>CloseTime) {CustomerNum=CustomerNum-QLength(q);printf("½áÊøÓªÒµ\n");break;}
+				 if(leavetime>CloseTime) {CustomerNum=CustomerNum-QLength(q);printf("ç»“æŸè¥ä¸š\n");break;}
 			     else {
 				 TotalTime+=leavetime-ArrivalTime;
                  CustomerNum++;
 				 num=CustomerNum;
 				 Summoney-=money;
-				 printf("µÚ%3d¿Í»§µ½´ïÊ±¼ä%3d°ìÀíÒµÎñ2°ìÀí½ğ¶î%5dÒøĞĞ×Ü½ğ¶î%5dÀë¿ªÊ±¼ä%3d\n",num,ArrivalTime,money,Summoney,leavetime);	 
+				 printf("ç¬¬%3då®¢æˆ·åˆ°è¾¾æ—¶é—´%3dåŠç†ä¸šåŠ¡2åŠç†é‡‘é¢%5dé“¶è¡Œæ€»é‡‘é¢%5dç¦»å¼€æ—¶é—´%3d\n",num,ArrivalTime,money,Summoney,leavetime);	 
 			   }
 			   }
 			  else{CustomerNum++;num=CustomerNum;money2=money;temp=Duration;
-			  printf("µÚ%3d¿Í»§µ½´ïÊ±¼ä%3d°ìÀí½ğ¶î%5d ½øÈë´°¿Ú2µÈ´ı\n",num,ArrivalTime,money,Summoney,leavetime);
+			  printf("ç¬¬%3då®¢æˆ·åˆ°è¾¾æ—¶é—´%3dåŠç†é‡‘é¢%5d è¿›å…¥çª—å£2ç­‰å¾…\n",num,ArrivalTime,money,Summoney,leavetime);
 			  EnterQueue(q,money2,temp); 
 				  
 				  }
@@ -175,8 +175,8 @@ int main(){
 		   
 	   }
 	   CustomerNum=CustomerNum-QLength(q);
-	   printf("½Ó´ı¿Í»§Êı£º%d\n", CustomerNum);
-	   printf("Æ½¾ùÊ±¼ä£º%f\n", (float)TotalTime/(float)CustomerNum);
+	   printf("æ¥å¾…å®¢æˆ·æ•°ï¼š%d\n", CustomerNum);
+	   printf("å¹³å‡æ—¶é—´ï¼š%f\n", (float)TotalTime/(float)CustomerNum);
 
 	   
 }

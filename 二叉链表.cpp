@@ -1,4 +1,4 @@
-#include "stdio.h"
+ï»¿#include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
 #define N 30
@@ -11,7 +11,7 @@ typedef struct BiTNode{
 char PreArray[30] = {"\0"};
 char InArray[30] = {"\0"};
 
-void PreCreateTree(BiTree &T,int a,int b,int Length){   //a:ÏÈĞòÁĞ×ÓÊ÷µÚÒ»¸ö½ÚµãÏÂ±ê£¬b:ÖĞĞòÁĞ×ÓÊ÷µÚÒ»¸ö½ÚµãÏÂ±ê 
+void PreCreateTree(BiTree &T,int a,int b,int Length){   //a:å…ˆåºåˆ—å­æ ‘ç¬¬ä¸€ä¸ªèŠ‚ç‚¹ä¸‹æ ‡ï¼Œb:ä¸­åºåˆ—å­æ ‘ç¬¬ä¸€ä¸ªèŠ‚ç‚¹ä¸‹æ ‡ 
     if(Length <= 0||strlen(PreArray) != strlen(InArray))
 	{  
         T = NULL;
@@ -19,13 +19,13 @@ void PreCreateTree(BiTree &T,int a,int b,int Length){   //a:ÏÈĞòÁĞ×ÓÊ÷µÚÒ»¸ö½Úµã
     }  
     else{  
         T = (BiTree) malloc (sizeof(BiTNode));   
-        T->data = PreArray[a];  //ÏÈĞòÁĞµÚÒ»¸ö×ÖÄ¸¼´Îª¸ù½ÚµãµÄÖµ
+        T->data = PreArray[a];  //å…ˆåºåˆ—ç¬¬ä¸€ä¸ªå­—æ¯å³ä¸ºæ ¹èŠ‚ç‚¹çš„å€¼
         if(!strchr(InArray,PreArray[a])) 
 		puts("error");
-		int num = strchr(InArray,PreArray[a]) - InArray;    //strchrÓÃÀ´ÕÒµ½¸ù½ÚµãµÄÖµÔÚÖĞĞòÁĞÖĞµÄµØÖ·
-        int Length_left = num - b;  //×ó×ÓÊ÷½ÚµãÊı 
+		int num = strchr(InArray,PreArray[a]) - InArray;    //strchrç”¨æ¥æ‰¾åˆ°æ ¹èŠ‚ç‚¹çš„å€¼åœ¨ä¸­åºåˆ—ä¸­çš„åœ°å€
+        int Length_left = num - b;  //å·¦å­æ ‘èŠ‚ç‚¹æ•° 
         PreCreateTree(T->lchild,a + 1,b,Length_left);   
-        int Length_right = Length - 1 - Length_left;  //ÓÒ×ÓÊ÷½ÚµãÊı 
+        int Length_right = Length - 1 - Length_left;  //å³å­æ ‘èŠ‚ç‚¹æ•° 
         PreCreateTree(T->rchild,a + Length_left + 1,num + 1,Length_right);  
     } 
 }

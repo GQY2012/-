@@ -1,20 +1,20 @@
-#include"stdlib.h"
+ï»¿#include"stdlib.h"
 #include"stdio.h"
 #include"math.h"
-typedef struct term { //ÏîµÄ±íÊ¾£¬¶àÏîÊ½µÄÏî×÷ÎªLinkListµÄÊı¾İÔªËØ
-	float coef; //ÏµÊı
-	int expn; //Ö¸Êı
+typedef struct term { //é¡¹çš„è¡¨ç¤ºï¼Œå¤šé¡¹å¼çš„é¡¹ä½œä¸ºLinkListçš„æ•°æ®å…ƒç´ 
+	float coef; //ç³»æ•°
+	int expn; //æŒ‡æ•°
 	struct term *next;
 	}term;
 
 term* CreatPolyn(term *P,int m) {
-	// ÊäÈëmÏîµÄÏµÊıºÍÖ¸Êı£¬½¨Á¢±íÊ¾Ò»Ôª¶àÏîÊ½µÄÓĞĞòÁ´±íP
+	// è¾“å…¥mé¡¹çš„ç³»æ•°å’ŒæŒ‡æ•°ï¼Œå»ºç«‹è¡¨ç¤ºä¸€å…ƒå¤šé¡¹å¼çš„æœ‰åºé“¾è¡¨P
 	if(m <= 0) return NULL;
 	term *h = P = (term*)malloc(sizeof(term)), *q;
 	P->coef = 0.0;
 	int i;
-	printf("ÒÀ´ÎÊäÈë%d¸öÊı£¨Ç°Ò»¸öÎªÏµÊı£¬ºóÒ»¸öÎªÖ¸Êı£©\n",m*2);
-	for (i = 1; i <= m; i++) { // ÒÀ´ÎÊäÈëm¸ö·ÇÁãÏî
+	printf("ä¾æ¬¡è¾“å…¥%dä¸ªæ•°ï¼ˆå‰ä¸€ä¸ªä¸ºç³»æ•°ï¼Œåä¸€ä¸ªä¸ºæŒ‡æ•°ï¼‰\n",m*2);
+	for (i = 1; i <= m; i++) { // ä¾æ¬¡è¾“å…¥mä¸ªéé›¶é¡¹
 		scanf("%f%d",&P->coef,&P->expn);
 		q = P;
 	P = P->next = (term*)malloc(sizeof(term));
@@ -24,7 +24,7 @@ term* CreatPolyn(term *P,int m) {
 	return h;
 }
 
-term* selsort(term *h) { //ÅÅĞò
+term* selsort(term *h) { //æ’åº
 	term *g, *p, *q;
 	if(!h) return NULL;
 		float f;
@@ -91,27 +91,27 @@ return 0;
 }
 
 term* APolyn(term *Pa, term *Pb) {
-// ¶àÏîÊ½¼Ó·¨£ºPa = Pa£«Pb£¬ÀûÓÃÁ½¸ö¶àÏîÊ½µÄ½áµã¹¹³É"ºÍ¶àÏîÊ½"¡£
+// å¤šé¡¹å¼åŠ æ³•ï¼šPa = Paï¼‹Pbï¼Œåˆ©ç”¨ä¸¤ä¸ªå¤šé¡¹å¼çš„ç»“ç‚¹æ„æˆ"å’Œå¤šé¡¹å¼"ã€‚
 	term *h, *qa = Pa, *qb = Pb, *p, *q;
 	float sum;
 	h = p = (term*)malloc(sizeof(term));
 	p->next = NULL;
-while (qa && qb) { // PaºÍPb¾ù·Ç¿Õ
+while (qa && qb) { // Paå’ŒPbå‡éç©º
 	switch (Compare(qa,qb)) {
-	case -1: // ¶àÏîÊ½PAÖĞµ±Ç°½áµãµÄÖ¸ÊıÖµĞ¡
+	case -1: // å¤šé¡¹å¼PAä¸­å½“å‰ç»“ç‚¹çš„æŒ‡æ•°å€¼å°
 	p->next = qb;
 	p = qb;
 	qb = qb->next;
 	break;
-	case 0: // Á½ÕßµÄÖ¸ÊıÖµÏàµÈ
+	case 0: // ä¸¤è€…çš„æŒ‡æ•°å€¼ç›¸ç­‰
 	sum = qa->coef + qb->coef;
-if (sum != 0.0) { // ĞŞ¸Ä¶àÏîÊ½PAÖĞµ±Ç°½áµãµÄÏµÊıÖµ
+if (sum != 0.0) { // ä¿®æ”¹å¤šé¡¹å¼PAä¸­å½“å‰ç»“ç‚¹çš„ç³»æ•°å€¼
 	p->next = qa;
 	qa->coef = sum;
 	p = qa;
 	qa = qa->next;
 }
-else { // É¾³ı¶àÏîÊ½PAÖĞµ±Ç°½áµã
+else { // åˆ é™¤å¤šé¡¹å¼PAä¸­å½“å‰ç»“ç‚¹
 	q = qa;
 	qa = qa->next;
 	free(q);
@@ -119,14 +119,14 @@ else { // É¾³ı¶àÏîÊ½PAÖĞµ±Ç°½áµã
 	q = qb;
 	qb = qb->next;
 	free(q); break;
-	case 1: // ¶àÏîÊ½PBÖĞµ±Ç°½áµãµÄÖ¸ÊıÖµĞ¡
+	case 1: // å¤šé¡¹å¼PBä¸­å½“å‰ç»“ç‚¹çš„æŒ‡æ•°å€¼å°
 	p->next = qa;
 	p = qa;
 	qa = qa->next; break;
 }
 }
-	if (qa) p->next = qa; // Á´½ÓPaÖĞÊ£Óà½áµã
-	if (qb) p->next = qb; // Á´½ÓPbÖĞÊ£Óà½áµã
+	if (qa) p->next = qa; // é“¾æ¥Paä¸­å‰©ä½™ç»“ç‚¹
+	if (qb) p->next = qb; // é“¾æ¥Pbä¸­å‰©ä½™ç»“ç‚¹
 	q = h;
 	h = h->next;
 	free(q);
@@ -135,7 +135,7 @@ else { // É¾³ı¶àÏîÊ½PAÖĞµ±Ç°½áµã
 
 term* A(term *Pa, term *Pb) {
 	int n;
-	puts("ÊäÈëµÚ¶ş¸öÒ»Ôª¶àÏîÊ½µÄÏîÊı");
+	puts("è¾“å…¥ç¬¬äºŒä¸ªä¸€å…ƒå¤šé¡¹å¼çš„é¡¹æ•°");
 	scanf("%d",&n);
 	Pb = CreatPolyn(Pb,n);
 	Pb = selsort(Pb);
@@ -149,7 +149,7 @@ term* A(term *Pa, term *Pb) {
 return Pa;
 }
 
-term* BPolyn(term *Pa, term *Pb) {  // ¼õ·¨
+term* BPolyn(term *Pa, term *Pb) {  // å‡æ³•
 	term *p = Pb;
 	while(p) {
 	p->coef *= -1;
@@ -160,7 +160,7 @@ term* BPolyn(term *Pa, term *Pb) {  // ¼õ·¨
 
 term* B(term *Pa, term *Pb) {
 	int n;
-	puts("ÊäÈëÏÂÒ»¸öÒ»Ôª¶àÏîÊ½µÄÏîÊı");
+	puts("è¾“å…¥ä¸‹ä¸€ä¸ªä¸€å…ƒå¤šé¡¹å¼çš„é¡¹æ•°");
 	scanf("%d",&n);
 	Pb = CreatPolyn(Pb,n);
 	Pb = selsort(Pb);
@@ -175,7 +175,7 @@ return Pa;
 }
 
 
-float GetPoly(term*p,float x)//Ò»Ôª¶àÏîÊ½ÔÚx´¦µÄÖµ
+float GetPoly(term*p,float x)//ä¸€å…ƒå¤šé¡¹å¼åœ¨xå¤„çš„å€¼
  {
  	term*q=p;
  	float n=0;
@@ -187,7 +187,7 @@ float GetPoly(term*p,float x)//Ò»Ôª¶àÏîÊ½ÔÚx´¦µÄÖµ
 	 return n;
 }
 
- term* Derivation(term*p)//Çóµ¼
+ term* Derivation(term*p)//æ±‚å¯¼
  {
  	term*q=p;
 	 while(q)
@@ -208,22 +208,22 @@ float GetPoly(term*p,float x)//Ò»Ôª¶àÏîÊ½ÔÚx´¦µÄÖµ
 main() {
 	term *M=NULL,*N=NULL;
 	int m=1,n;
-	puts("Ò»Ôª¶àÏîÊ½¼ÆËã:\nÊäÈëµÚÒ»¸öÒ»Ôª¶àÏîÊ½µÄÏîÊı");
+	puts("ä¸€å…ƒå¤šé¡¹å¼è®¡ç®—:\nè¾“å…¥ç¬¬ä¸€ä¸ªä¸€å…ƒå¤šé¡¹å¼çš„é¡¹æ•°");
 	scanf("%d",&n);
 	M = CreatPolyn(M,n);
 	M = selsort(M);
 	PrintfPoly(M);
 while(m){
-	printf("\n1:¼Ó\n2:¼õ\n3:ÇóÖµ\n4:Çóµ¼\n0:½áÊø\n");
+	printf("\n1:åŠ \n2:å‡\n3:æ±‚å€¼\n4:æ±‚å¯¼\n0:ç»“æŸ\n");
 scanf("%d",&m);
 	switch(m) {
 		case 1:M = A(M,N); break;
 		case 2:M = B(M,N); break;
 		case 3:
- 				printf("ÊäÈëx =\n");
+ 				printf("è¾“å…¥x =\n");
  				float x;
  				scanf("%f",&x);
- 				printf("¶àÏîÊ½ÖµÎª%g\n",GetPoly(M,x));
+ 				printf("å¤šé¡¹å¼å€¼ä¸º%g\n",GetPoly(M,x));
 				break;
 		case 4:
 				PrintfPoly(Derivation(M));
